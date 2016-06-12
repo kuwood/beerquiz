@@ -13,6 +13,10 @@ body {
   background-color: #CABC66;
 }
 
+section {
+  padding-top: 4em;
+}
+
 h1 {
   font-size: 2em;
   text-align: center;
@@ -36,6 +40,12 @@ button:hover {
   text-decoration: none;
 }
 
+.splashIntro, .questions ul, .results {
+  text-align: center;
+  margin: auto;
+  width: 70%;
+}
+
 .questions ul {
   margin: auto;
   width: 70%;
@@ -54,17 +64,12 @@ button:hover {
 }
 
 .questions {
-  padding-top: 4em;
   text-align: center;
   font-size: 1.2em;
 }
 
-.answers {
-  padding-top: 4em;
-}
-
 .buttonWrap {
-  width: 50%;
+  width: 15em;
   padding: 3em;
   margin: auto;
 }
