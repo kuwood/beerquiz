@@ -1,0 +1,46 @@
+* {
+  color: #2E2416;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2em;
+  text-align: center;
+  line-height: 2em;
+}
+
+section {
+    background-color: #CABC66;
+}
+
+button {
+  width: 100%;
+}
+
+.answers ul {
+  margin: auto;
+  width: 50%;
+  padding-bottom: 4em;
+}
+
+.titleBar {
+  width: 100%;
+  height: 4em;;
+  color: #2E2416;
+  background-color: #987A4D;
+}
+
+.questions {
+  padding-top: 4em;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.answers {
+  padding-top: 4em;
+}
+
+.buttonWrap {
+  width: 50%;
+  margin: auto;
+}
