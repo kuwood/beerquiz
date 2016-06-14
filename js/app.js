@@ -67,7 +67,7 @@ function pageArrival() {
 
 function newQuestion(obj) {
   $('.titleBar').append('<ul></ul>');
-  $('.titleBar ul').append('<h1 id="questionNum">Question ' + (questionArray.indexOf(obj) + 1) + ' of ' + questionArray.length + '</h1>');
+  $('.titleBar ul').append('<h1 id="questionNum">Question ' + (onQuestion + 1) + ' of ' + questionArray.length + '</h1>');
   $('.questions').append('<ul></ul>');
   $('.questions ul').append('<li>' + obj.question + '</li>');
   $('.answers').append('<ul></ul>');
@@ -76,31 +76,24 @@ function newQuestion(obj) {
 
 function answerSubmit() {
   var userAnswer = $("input[type='radio']:checked").val()
+  if (userAnswer === undefined) {
+    alert("You must make a selection.");
+    return;
+  }
   if (userAnswer === questionArray[onQuestion].answer) {
     score += 1;
     console.log("correct!")
   } else {
     console.log("wrong!");
   }
+  return true;
 }
 
 function nextQuestion() {
-  if (onQuestion === 0) {
+  if (onQuestion < questionArray.length - 1) {
     clear();
-    newQuestion(manufacturer);
     onQuestion += 1;
-  } else if (onQuestion === 1) {
-    clear();
-    newQuestion(pint);
-    onQuestion += 1;
-  } else if (onQuestion === 2) {
-    clear();
-    newQuestion(ibu);
-    onQuestion += 1;
-  } else if (onQuestion === 3) {
-    clear();
-    newQuestion(oldest);
-    onQuestion += 1;
+    newQuestion(questionArray[onQuestion]);
   } else {
     clear();
     onQuestion += 1;
@@ -128,10 +121,11 @@ $(document).ready(function(){
     appendSubmit();
   })
   $('.answers').on("click","#submitAnswer",function() {
-    answerSubmit();
-    nextQuestion();
-    if (onQuestion <= 4) {
-      appendSubmit();
+    if (answerSubmit() === true) {
+      nextQuestion();
+      if (onQuestion <= 4) {
+        appendSubmit();
+      }
     }
   })
   $('.completed').on("click","#playAgain",function() {
