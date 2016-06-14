@@ -1,4 +1,5 @@
 var fermenting = {
+  name:"fermenting",
   question: "Are Ales generally brewed with top or bottom fermenting yeast?",
   answers: ["The Middle","The bottom","The top","Throughout the wart"],
   num:0,
@@ -6,31 +7,35 @@ var fermenting = {
 }
 
 var manufacturer = {
+  name:"manufacturer",
   question: "What is the name of largest beer manufacturer in USA?",
   answers: ["MillerCoors","Anheuser Busch","Pabst","Heineken USA"],
   num:1,
-  answer:1
+  answer:"1"
 }
 
 var pint = {
+  name:"pint",
   question: "How many ounces are in a typical pint in America?",
   answers: [16,20,12,22],
   num:2,
-  answer:0
+  answer:"0"
 }
 
 var ibu = {
+  name:"ibu",
   question: "What does IBU stand for?",
   answers: ["International Brewing Union","Internal Barley Unison","Invitational Beer University","International Bittering Units"],
   num:3,
-  answer:3
+  answer:"3"
 }
 
 var oldest = {
+  name:"oldest",
   question: "Which is the oldest operating brewery in the US?",
   answers: ["Pabst Brewing Company","Yuengling","Anheuser-Busch","Miller Brewing Company"],
   num:4,
-  answer:1
+  answer:"1"
 }
 
 var questionArray = [fermenting,manufacturer,pint,ibu,oldest];
@@ -51,7 +56,7 @@ function clear() {
 function populateAnswers(obj) {
   var num = 0;
   obj.answers.forEach(function(i,num) {
-    $('.answers ul').append('<li><input type="radio" name="fermAnswers" value="'+ num++ +'" /><label for="fermAnswers">' + i + '</label></li>');
+    $('.answers ul').append('<li><input type="radio" name="' + obj.name + '" value="'+ num++ +'" class="required" /><label for="' + obj.name + '">' + i + '</label></li>');
   })
 }
 
@@ -96,7 +101,23 @@ function nextQuestion() {
     clear();
     newQuestion(oldest);
     onQuestion += 1;
+  } else {
+    clear();
+    onQuestion += 1;
+    showResults();
+    appendPlayAgain();
   }
+}
+
+function showResults() {
+  $('.titleBar').append('<ul></ul>');
+  $('.titleBar ul').append('<h1 id="resultsTitle">Results:</h1>');
+  $('.completed').append('<ul class="results"></ul>');
+  $('.completed ul').append('<li>You answered ' + score + ' out of 5 correct!</li>');
+}
+
+function appendPlayAgain() {
+  $('.completed').append('<div class="buttonWrap"><button class="btn" id="playAgain">Take it again!</button></div>')
 }
 
 $(document).ready(function(){
@@ -112,5 +133,12 @@ $(document).ready(function(){
     if (onQuestion <= 4) {
       appendSubmit();
     }
+  })
+  $('.completed').on("click","#playAgain",function() {
+    onQuestion = 0;
+    score = 0;
+    clear();
+    newQuestion(fermenting);
+    appendSubmit();
   })
 })
